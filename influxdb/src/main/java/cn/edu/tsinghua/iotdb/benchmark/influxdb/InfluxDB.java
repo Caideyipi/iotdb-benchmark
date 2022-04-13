@@ -19,6 +19,8 @@
 
 package cn.edu.tsinghua.iotdb.benchmark.influxdb;
 
+import org.apache.iotdb.influxdb.IoTDBInfluxDBFactory;
+
 import cn.edu.tsinghua.iotdb.benchmark.conf.Config;
 import cn.edu.tsinghua.iotdb.benchmark.conf.ConfigDescriptor;
 import cn.edu.tsinghua.iotdb.benchmark.entity.Batch;
@@ -72,7 +74,8 @@ public class InfluxDB implements IDatabase {
               .readTimeout(5, TimeUnit.MINUTES)
               .writeTimeout(5, TimeUnit.MINUTES)
               .retryOnConnectionFailure(true);
-      influxDbInstance = org.influxdb.InfluxDBFactory.connect(influxUrl, client);
+      //influxDbInstance = org.influxdb.InfluxDBFactory.connect(influxUrl, client);
+	  influxDbInstance = IoTDBInfluxDBFactory.connect(influxUrl, client);
     } catch (Exception e) {
       LOGGER.error("Initialize InfluxDB failed because ", e);
       throw new TsdbException(e);
