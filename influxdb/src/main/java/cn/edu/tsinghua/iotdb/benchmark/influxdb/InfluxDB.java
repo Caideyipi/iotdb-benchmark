@@ -75,7 +75,7 @@ public class InfluxDB implements IDatabase {
               .writeTimeout(5, TimeUnit.MINUTES)
               .retryOnConnectionFailure(true);
       //influxDbInstance = org.influxdb.InfluxDBFactory.connect(influxUrl, client);
-	  influxDbInstance = IoTDBInfluxDBFactory.connect(influxUrl, client);
+	  influxDbInstance = IoTDBInfluxDBFactory.connect("http://127.0.0.1:8086", "root", "root");
     } catch (Exception e) {
       LOGGER.error("Initialize InfluxDB failed because ", e);
       throw new TsdbException(e);
