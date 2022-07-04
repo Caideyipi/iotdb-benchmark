@@ -28,7 +28,11 @@ import cn.edu.tsinghua.iotdb.benchmark.workload.enums.OutOfOrderMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -288,9 +292,12 @@ public class ConfigDescriptor {
                 properties.getProperty(
                     "ENABLE_THRIFT_COMPRESSION", config.isENABLE_THRIFT_COMPRESSION() + "")));
         config.setSG_STRATEGY(properties.getProperty("SG_STRATEGY", "hash"));
-        config.setGROUP_NUMBER(
-            Integer.parseInt(
-                properties.getProperty("GROUP_NUMBER", config.getGROUP_NUMBER() + "")));
+
+        config.setSG_LIST(properties.getProperty("SG_LIST", ""));
+        config.setGROUP_NUMBER(config.getSG_LIST().size());
+        //        config.setGROUP_NUMBER(
+        //            Integer.parseInt(
+        //                properties.getProperty("GROUP_NUMBER", config.getGROUP_NUMBER() + "")));
         config.setIOTDB_SESSION_POOL_SIZE(
             Integer.parseInt(
                 properties.getProperty(

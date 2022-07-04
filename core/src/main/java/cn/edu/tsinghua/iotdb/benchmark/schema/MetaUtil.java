@@ -54,7 +54,11 @@ public class MetaUtil {
 
   /** Get Format Name */
   public static String getGroupName(Object groupId) {
-    return config.getGROUP_NAME_PREFIX() + groupId;
+    if (groupId instanceof Integer) {
+      return config.getSG_LIST().get(Integer.parseInt(groupId.toString()));
+    } else {
+      return config.getGROUP_NAME_PREFIX() + groupId;
+    }
   }
 
   public static String getDeviceName(Object deviceId) {

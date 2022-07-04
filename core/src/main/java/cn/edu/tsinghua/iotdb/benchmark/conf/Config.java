@@ -219,6 +219,8 @@ public class Config {
   private boolean ENABLE_THRIFT_COMPRESSION = false;
   /** Storage Group Allocation Strategy, currently supported hash/mode/div */
   private String SG_STRATEGY = "mod";
+  /** Storage Group Name */
+  private List<String> SG_LIST = new ArrayList<>();
   /** The number of storage group, must less than or equal to number of devices */
   private int GROUP_NUMBER = 20;
   /** The size of IoTDB core session pool */
@@ -988,6 +990,17 @@ public class Config {
 
   public void setSG_STRATEGY(String SG_STRATEGY) {
     this.SG_STRATEGY = SG_STRATEGY;
+  }
+
+  public List<String> getSG_LIST() {
+    return SG_LIST;
+  }
+
+  public void setSG_LIST(String SG_LIST) {
+    if (SG_LIST.length() != 0) {
+      this.SG_LIST = new ArrayList<>();
+      this.SG_LIST.addAll(Arrays.asList(SG_LIST.split(",")));
+    }
   }
 
   public int getGROUP_NUMBER() {
